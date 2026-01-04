@@ -35,7 +35,9 @@ func init() {
 var repoDir string
 
 func newTicketCmd() *cobra.Command {
-	return &cobra.Command{
+	var ticketF string
+
+	cmd := &cobra.Command{
 		Use:   "ticket",
 		Short: "Print the detected ticket ID (from --ticket/env/branch)",
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -46,7 +48,7 @@ func newTicketCmd() *cobra.Command {
 				return err
 			}
 
-			ticketID, source, err := resolveTicket(ctx, repoRoot, "")
+			ticketID, source, err := resolveTicket(ctx, repoRoot, ticketF)
 			if err != nil {
 				return err
 			}
@@ -55,6 +57,9 @@ func newTicketCmd() *cobra.Command {
 			return nil
 		},
 	}
+
+	cmd.Flags().StringVar(&ticketF, "ticket", "", "Ticket ID to use (overrides env/branch)")
+	return cmd
 }
 
 func newCommitCmd() *cobra.Command {
