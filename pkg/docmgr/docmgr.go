@@ -6,6 +6,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"regexp"
+	"strconv"
 	"strings"
 
 	"github.com/pkg/errors"
@@ -77,6 +78,14 @@ func ChangelogUpdate(ctx context.Context, repoRoot string, ticketID string, entr
 
 	_, err := run(ctx, repoRoot, args...)
 	return err
+}
+
+func Doctor(ctx context.Context, repoRoot string, ticketID string, staleAfterDays int) (string, error) {
+	args := []string{"doctor", "--ticket", ticketID}
+	if staleAfterDays > 0 {
+		args = append(args, "--stale-after", strconv.Itoa(staleAfterDays))
+	}
+	return run(ctx, repoRoot, args...)
 }
 
 func run(ctx context.Context, dir string, args ...string) (string, error) {

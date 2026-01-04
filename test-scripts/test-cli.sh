@@ -52,6 +52,11 @@ gitcommit --repo "$TEST_REPO_DIR" preflight --docmgr=false >/dev/null
 echo "✓ Preflight works"
 echo ""
 
+echo "Test 6: Version"
+gitcommit --version >/dev/null
+echo "✓ Version works"
+echo ""
+
 echo "=========================================="
 echo "All tests passed ✓"
 echo "=========================================="

@@ -47,6 +47,7 @@ if command -v docmgr >/dev/null; then
 	gitcommit --repo "$TEST_REPO_DIR" docmgr init >/dev/null
 	gitcommit --repo "$TEST_REPO_DIR" docmgr ticket create --ticket "$TICKET_ID" --title "Smoke test" --topics chat >/dev/null
 	gitcommit --repo "$TEST_REPO_DIR" preflight >/dev/null
+	gitcommit --repo "$TEST_REPO_DIR" docmgr doctor --ticket "$TICKET_ID" >/dev/null
 
 	hash2="$(gitcommit --repo "$TEST_REPO_DIR" commit -m "Docmgr updated commit")"
 	# Find the ticket changelog path created by docmgr in this repo.

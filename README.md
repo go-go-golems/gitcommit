@@ -14,6 +14,10 @@ Preflight checks (staged files, ticket, optional docmgr ticket existence):
 
 `gitcommit preflight`
 
+Version:
+
+`gitcommit --version`
+
 Commit (requires staged files):
 
 `gitcommit commit --ticket ABC-123 -m "Fix widget ordering"`
@@ -31,6 +35,7 @@ By default, `gitcommit commit` updates `docmgr` via `docmgr changelog update --t
 - Create docmgr scaffolding:
   - `gitcommit docmgr init`
   - `gitcommit docmgr ticket create --ticket ABC-123 --title "..." --topics chat`
+  - `gitcommit docmgr doctor --ticket ABC-123`
 
 ## Development
 
