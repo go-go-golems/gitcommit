@@ -60,7 +60,7 @@ RelatedFiles:
       Note: Minimal CLI smoke tests
 ExternalSources: []
 Summary: ""
-LastUpdated: 2026-01-04T18:27:23.926420343-05:00
+LastUpdated: 2026-01-04T18:37:59-05:00
 WhatFor: ""
 WhenToUse: ""
 ---
@@ -88,7 +88,7 @@ WhenToUse: ""
 
 ## Status
 
-Current status: **active**
+Current status: **complete**
 
 ## Topics
 
