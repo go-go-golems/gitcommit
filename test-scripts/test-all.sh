@@ -51,6 +51,22 @@ else
 fi
 echo ""
 
+echo "=== PHASE 4: Noise-file rejection ==="
+mkdir -p "$TEST_REPO_DIR/dist"
+echo "noise" > "$TEST_REPO_DIR/dist/noise.bin"
+git -C "$TEST_REPO_DIR" add "$TEST_REPO_DIR/dist/noise.bin"
+
+set +e
+gitcommit --repo "$TEST_REPO_DIR" commit --docmgr=false -m "Should fail due to noise" >/dev/null 2>&1
+exit_code=$?
+set -e
+
+test $exit_code -ne 0
+git -C "$TEST_REPO_DIR" reset -q HEAD -- "$TEST_REPO_DIR/dist/noise.bin"
+rm -rf "$TEST_REPO_DIR/dist"
+echo "✓ Noise-file check blocks commit by default"
+echo ""
+
 echo "=========================================="
 echo "✓ Smoke tests passed"
 echo "=========================================="

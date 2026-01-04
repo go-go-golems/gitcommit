@@ -14,6 +14,7 @@ import (
 	"github.com/go-go-golems/gitcommit/pkg/docmgr"
 	"github.com/go-go-golems/gitcommit/pkg/git"
 	"github.com/go-go-golems/gitcommit/pkg/ticket"
+	"github.com/go-go-golems/gitcommit/pkg/validate"
 )
 
 func Execute() error {
@@ -69,6 +70,7 @@ func newCommitCmd() *cobra.Command {
 		ticketF string
 		dryRun  bool
 		useDoc  bool
+		allow   bool
 	)
 
 	cmd := &cobra.Command{
@@ -94,6 +96,22 @@ func newCommitCmd() *cobra.Command {
 				return errors.New("no staged files; stage changes first (git add ...)")
 			}
 
+			if !allow {
+				noise := validate.FindNoise(stagedFiles)
+				if len(noise) > 0 {
+					var b strings.Builder
+					b.WriteString("refusing to commit common noise files (use --allow-noise to override):\n")
+					for _, n := range noise {
+						b.WriteString("- ")
+						b.WriteString(n.Path)
+						b.WriteString(" (")
+						b.WriteString(n.Reason)
+						b.WriteString(")\n")
+					}
+					return errors.New(b.String())
+				}
+			}
+
 			ticketID, source, err := resolveTicket(ctx, repoRoot, ticketF)
 			if err != nil {
 				return err
@@ -106,16 +124,8 @@ func newCommitCmd() *cobra.Command {
 				_, _ = fmt.Fprintf(cmd.OutOrStdout(), "ticket: %s (%s)\n", ticketID, source)
 				_, _ = fmt.Fprintf(cmd.OutOrStdout(), "msg:    %s\n", finalMessage)
 				_, _ = fmt.Fprintf(cmd.OutOrStdout(), "files:  %d staged\n", len(stagedFiles))
+				_, _ = fmt.Fprintf(cmd.OutOrStdout(), "docmgr: %v\n", useDoc)
 				return nil
-			}
-
-			if err := git.Commit(ctx, repoRoot, finalMessage, body); err != nil {
-				return err
-			}
-
-			hash, err := git.HeadHash(ctx, repoRoot)
-			if err != nil {
-				return err
 			}
 
 			if useDoc {
@@ -134,7 +144,18 @@ func newCommitCmd() *cobra.Command {
 				if !exists {
 					return errors.Errorf("docmgr ticket %s not found; create it with: docmgr ticket create-ticket --ticket %s --title \"...\" --topics ...", ticketID, ticketID)
 				}
+			}
 
+			if err := git.Commit(ctx, repoRoot, finalMessage, body); err != nil {
+				return err
+			}
+
+			hash, err := git.HeadHash(ctx, repoRoot)
+			if err != nil {
+				return err
+			}
+
+			if useDoc {
 				fileNotes := make([]docmgr.FileNote, 0, len(stagedFiles))
 				for _, f := range stagedFiles {
 					fileNotes = append(fileNotes, docmgr.FileNote{
@@ -160,6 +181,7 @@ func newCommitCmd() *cobra.Command {
 	cmd.Flags().StringVar(&ticketF, "ticket", "", "Ticket ID to use (overrides env/branch)")
 	cmd.Flags().BoolVar(&useDoc, "docmgr", true, "Update docmgr changelog for the ticket")
 	cmd.Flags().BoolVar(&dryRun, "dry-run", false, "Print what would happen without committing")
+	cmd.Flags().BoolVar(&allow, "allow-noise", false, "Allow common noise files (dist/, node_modules/, .env, etc.) to be committed")
 
 	return cmd
 }
