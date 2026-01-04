@@ -57,6 +57,11 @@ gitcommit --version >/dev/null
 echo "✓ Version works"
 echo ""
 
+echo "Test 7: Help system topic"
+gitcommit help how-to-use >/dev/null
+echo "✓ Help system works"
+echo ""
+
 echo "=========================================="
 echo "All tests passed ✓"
 echo "=========================================="

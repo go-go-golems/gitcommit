@@ -18,6 +18,11 @@ Version:
 
 `gitcommit --version`
 
+Help topics:
+
+- `gitcommit help`
+- `gitcommit help how-to-use`
+
 Commit (requires staged files):
 
 `gitcommit commit --ticket ABC-123 -m "Fix widget ordering"`
