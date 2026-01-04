@@ -23,4 +23,19 @@ Step 2: Initialize docmgr + create ticket workspace + diary
 ### Related Files
 
 - /home/manuel/workspaces/2026-01-04/gitcommit/.ttmp.yaml — Initialize docmgr configuration
-- /home/manuel/workspaces/2026-01-04/gitcommit/ttmp/2026/01/04/GITCOMMIT-XXXX--bootstrap-gitcommit-repository/reference/01-diary.md — Create and start implementation diary
+- /home/manuel/workspaces/2026-01-04/gitcommit/ttmp/2025/12/14/GITCOMMIT-XXXX--build-a-go-cli-to-streamline-safe-git-commits-ticket-aware-docmgr-integration/reference/01-diary.md — Create and start implementation diary
+
+## 2026-01-04
+
+Commit b6a781c7cef712999246591c0b187f001349777b: GITCOMMIT-XXXX: Add ticket-aware commit command
+
+### Related Files
+
+- /home/manuel/workspaces/2026-01-04/gitcommit/README.md — Changed in commit b6a781c7cef712999246591c0b187f001349777b
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/root.go — Changed in commit b6a781c7cef712999246591c0b187f001349777b
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/commitmsg/commitmsg.go — Changed in commit b6a781c7cef712999246591c0b187f001349777b
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/commitmsg/commitmsg_test.go — Changed in commit b6a781c7cef712999246591c0b187f001349777b
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/docmgr/docmgr.go — Changed in commit b6a781c7cef712999246591c0b187f001349777b
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/git/git.go — Changed in commit b6a781c7cef712999246591c0b187f001349777b
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/ticket/ticket.go — Changed in commit b6a781c7cef712999246591c0b187f001349777b
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/ticket/ticket_test.go — Changed in commit b6a781c7cef712999246591c0b187f001349777b

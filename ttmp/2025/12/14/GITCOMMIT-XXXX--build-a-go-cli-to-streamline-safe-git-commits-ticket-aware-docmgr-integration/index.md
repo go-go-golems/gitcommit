@@ -22,13 +22,24 @@ RelatedFiles:
     - Path: go.mod
       Note: Go module root (github.com/go-go-golems/gitcommit)
     - Path: pkg/cli/root.go
-      Note: Cobra root command + Execute
+      Note: |-
+        Cobra root command + Execute
+        Implements gitcommit subcommands
+    - Path: pkg/commitmsg/commitmsg.go
+      Note: Ensure ticket prefix in commit summary
+    - Path: pkg/docmgr/docmgr.go
+      Note: Call docmgr to update ticket changelog
+    - Path: pkg/git/git.go
+      Note: Wrap git commands (repo root
+    - Path: pkg/ticket/ticket.go
+      Note: Detect ticket ID from branch name
 ExternalSources: []
 Summary: ""
 LastUpdated: 2026-01-04T17:14:42.037821946-05:00
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 # Build a Go CLI to streamline safe git commits (ticket-aware docmgr integration)

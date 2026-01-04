@@ -13,18 +13,31 @@ Owners: []
 RelatedFiles:
     - Path: .ttmp.yaml
       Note: docmgr configuration
+    - Path: README.md
+      Note: User-facing usage docs
     - Path: cmd/gitcommit/main.go
       Note: Entry point used in diary steps
     - Path: go.mod
       Note: Module init + dependency tracking
     - Path: pkg/cli/root.go
-      Note: Core CLI skeleton
+      Note: |-
+        Core CLI skeleton
+        Diary-tracked CLI implementation
+    - Path: pkg/commitmsg/commitmsg.go
+      Note: Diary-tracked message formatting
+    - Path: pkg/docmgr/docmgr.go
+      Note: Diary-tracked docmgr integration
+    - Path: pkg/git/git.go
+      Note: Diary-tracked git plumbing
+    - Path: pkg/ticket/ticket.go
+      Note: Diary-tracked ticket detection
 ExternalSources: []
 Summary: ""
 LastUpdated: 2026-01-04T17:14:45.432770047-05:00
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 # Diary
@@ -134,7 +147,7 @@ This does not rewrite git history; earlier commits and messages remain as-is, bu
 - Keep the docmgr workspace aligned with the explicit ticket ID used for the project
 
 ### What worked
-- Ticket workspace now lives under `ttmp/2026/01/04/GITCOMMIT-XXXX--bootstrap-gitcommit-repository/`
+- Ticket workspace now lives under `ttmp/2025/12/14/GITCOMMIT-XXXX--build-a-go-cli-to-streamline-safe-git-commits-ticket-aware-docmgr-integration/`
 
 ### What didn't work
 N/A
@@ -152,5 +165,51 @@ N/A
 - If `GITCOMMIT-XXXX` is a placeholder for a real ticket number, decide the final ID early and migrate once (not repeatedly).
 
 ### Code review instructions
-- Inspect `ttmp/2026/01/04/GITCOMMIT-XXXX--bootstrap-gitcommit-repository/index.md` for `Ticket:`
-- Validate there are no lingering references: `rg -n "GITCOMMIT-0001" ttmp/2026/01/04/GITCOMMIT-XXXX--bootstrap-gitcommit-repository`
+- Inspect `ttmp/2025/12/14/GITCOMMIT-XXXX--build-a-go-cli-to-streamline-safe-git-commits-ticket-aware-docmgr-integration/index.md` for `Ticket:`
+- Validate there are no lingering references: `rg -n "GITCOMMIT-0001" ttmp/2025/12/14/GITCOMMIT-XXXX--build-a-go-cli-to-streamline-safe-git-commits-ticket-aware-docmgr-integration`
+
+## Step 4: Add ticket-aware `gitcommit commit` with docmgr changelog updates
+
+This step implements the first “real” functionality: a `gitcommit commit` command that refuses to run without staged files, ensures the ticket prefix in the commit summary, and (by default) appends a `docmgr` changelog entry for the ticket with file notes.
+
+The aim is to streamline the common “commit + doc bookkeeping” loop without hiding important behavior: `docmgr` updates are written into the working tree and should be committed as a separate docs commit.
+
+**Commit (code):** b6a781c — "GITCOMMIT-XXXX: Add ticket-aware commit command"
+
+### What I did
+- Added ticket detection from `--ticket`, `GITCOMMIT_TICKET`, or current branch name
+- Added commit message formatting to ensure a `TICKET: ...` prefix
+- Added a minimal git wrapper to locate repo root, list staged files, run `git commit`, and fetch the resulting hash
+- Added a docmgr wrapper that updates the ticket changelog with commit hash + file notes
+- Added unit tests for ticket parsing and prefix formatting
+- Updated `README.md` with usage examples
+
+### Why
+- Make “safe” commits the default (no accidental empty commits, no missing ticket reference)
+- Make docmgr updates consistent and low-friction
+
+### What worked
+- `go test ./...` passes
+- `go run ./cmd/gitcommit ticket` reports ticket source
+- `go run ./cmd/gitcommit commit --ticket ... -m ...` commits and updates the docmgr changelog
+
+### What didn't work
+N/A
+
+### What I learned
+- `docmgr ticket list --ticket <id>` returns exit code 0 even when not found, so the integration needs to parse output (not exit status).
+
+### What was tricky to build
+- Keeping the command scriptable: write the resulting git commit hash to stdout while keeping status hints on stderr.
+
+### What warrants a second pair of eyes
+- The ticket regex is intentionally permissive (`FOO-123` and `FOO-XXXX`); confirm it won’t over-match in your branch naming conventions.
+
+### What should be done in the future
+- Add a more structured commit message format (types/scopes) if desired, and lock it down with tests.
+- Consider an optional `--commit-docs` mode to auto-commit docmgr updates if that matches your workflow.
+
+### Code review instructions
+- Start in `pkg/cli/root.go` (`newCommitCmd`, `resolveTicket`)
+- Review helpers: `pkg/git/git.go`, `pkg/docmgr/docmgr.go`, `pkg/ticket/ticket.go`, `pkg/commitmsg/commitmsg.go`
+- Validate: `go test ./...` then stage a small change and run `go run ./cmd/gitcommit commit --ticket GITCOMMIT-XXXX -m "Test"`
