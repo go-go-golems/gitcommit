@@ -240,3 +240,43 @@ N/A
 
 ### What should be done in the future
 N/A
+
+## Step 6: Add smoke-test scripts and run them against a temp repo
+
+This step adds repo-local smoke tests (like `prescribe/test-scripts`) so we can validate `gitcommit` end-to-end without touching a real repository. The scripts create a throwaway git repo under `/tmp`, initialize `docmgr` in that repo, and then run `gitcommit` against it via `go run`.
+
+The goal is fast feedback on the “happy path” and the safety checks (no staged files, dry-run, docmgr changelog update).
+
+### What I did
+- Added `test-scripts/setup-test-repo.sh` to create `/tmp/gitcommit-test-repo` with a `feature/GITCOMMIT-XXXX-smoke` branch and staged changes
+- Added `test-scripts/test-cli.sh` to validate `--help`, ticket detection/override, and `commit --dry-run`
+- Added `test-scripts/test-all.sh` to validate real commits with and without docmgr, and verify the docmgr changelog contains the created commit hash
+- Ran:
+  - `bash test-scripts/test-cli.sh`
+  - `bash test-scripts/test-all.sh`
+
+### Why
+- Ensure the CLI works in a clean environment and stays regression-resistant as commands expand
+
+### What worked
+- `test-cli.sh` passed
+- `test-all.sh` passed and verified docmgr changelog updates in the temp repo
+
+### What didn't work
+N/A
+
+### What I learned
+- `docmgr` seeds a small default vocabulary; for the smoke repo it’s simplest to use an existing topic (e.g. `chat`) to avoid vocabulary warnings.
+
+### What was tricky to build
+- Keeping the scripts strict (`set -euo pipefail`) while still being portable across environments (e.g. skipping docmgr steps when it’s not installed).
+
+### What warrants a second pair of eyes
+- The smoke tests assume `rg` is installed; if you want these scripts to be maximally portable, we may want to add a small fallback to `grep`.
+
+### What should be done in the future
+- Add a negative test for “no staged files” to ensure it fails with the intended error message.
+
+### Code review instructions
+- Start in `test-scripts/test-cli.sh` and `test-scripts/test-all.sh`
+- Run: `bash test-scripts/test-all.sh`

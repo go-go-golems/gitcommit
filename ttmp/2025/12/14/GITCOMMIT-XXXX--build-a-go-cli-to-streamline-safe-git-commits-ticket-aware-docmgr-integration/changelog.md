@@ -48,3 +48,25 @@ Commit eccb6a8566c692eaba19c68aa725e526c941baeb: GITCOMMIT-XXXX: Allow --ticket 
 
 - /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/root.go — Changed in commit eccb6a8566c692eaba19c68aa725e526c941baeb
 
+
+## 2026-01-04
+
+Step 6: Add and run smoke test scripts
+
+### Related Files
+
+- /home/manuel/workspaces/2026-01-04/gitcommit/test-scripts/test-all.sh — End-to-end smoke test suite
+- /home/manuel/workspaces/2026-01-04/gitcommit/test-scripts/test-cli.sh — Minimal CLI smoke test suite
+
+
+## 2026-01-04
+
+Commit 0798a66ca8e823270b93083323f7a4aff764b158: GITCOMMIT-XXXX: Add smoke test scripts
+
+### Related Files
+
+- /home/manuel/workspaces/2026-01-04/gitcommit/test-scripts/README.md — Changed in commit 0798a66ca8e823270b93083323f7a4aff764b158
+- /home/manuel/workspaces/2026-01-04/gitcommit/test-scripts/setup-test-repo.sh — Changed in commit 0798a66ca8e823270b93083323f7a4aff764b158
+- /home/manuel/workspaces/2026-01-04/gitcommit/test-scripts/test-all.sh — Changed in commit 0798a66ca8e823270b93083323f7a4aff764b158
+- /home/manuel/workspaces/2026-01-04/gitcommit/test-scripts/test-cli.sh — Changed in commit 0798a66ca8e823270b93083323f7a4aff764b158
+

@@ -33,12 +33,21 @@ RelatedFiles:
       Note: Wrap git commands (repo root
     - Path: pkg/ticket/ticket.go
       Note: Detect ticket ID from branch name
+    - Path: test-scripts/README.md
+      Note: How to run smoke tests
+    - Path: test-scripts/setup-test-repo.sh
+      Note: Create temp git+docmgr repo for smoke tests
+    - Path: test-scripts/test-all.sh
+      Note: End-to-end smoke test suite
+    - Path: test-scripts/test-cli.sh
+      Note: Minimal CLI smoke tests
 ExternalSources: []
 Summary: ""
 LastUpdated: 2026-01-04T17:14:42.037821946-05:00
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 

@@ -13,3 +13,5 @@
 - [x] Integrate docmgr: update ticket changelog with commit hash + file notes
 - [x] Add unit tests for ticket detection + prefix logic
 - [x] Update README with usage examples
+- [x] Add smoke test scripts (create temp repo, exercise ticket/commit commands)
+- [x] Run smoke test scripts and record results
