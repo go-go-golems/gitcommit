@@ -15,6 +15,8 @@ RelatedFiles:
       Note: docmgr configuration
     - Path: README.md
       Note: User-facing usage docs
+    - Path: cmd/gitcommit/cmds
+      Note: Target glazed command tree
     - Path: cmd/gitcommit/main.go
       Note: |-
         Entry point used in diary steps
@@ -51,6 +53,7 @@ LastUpdated: 2026-01-04T17:14:45.432770047-05:00
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -400,3 +403,74 @@ N/A
 ### Code review instructions
 - Start in `cmd/gitcommit/main.go` and `pkg/cli/buildinfo.go`
 - Review `pkg/cli/docmgr.go` and `pkg/docmgr/docmgr.go`
+
+## Step 10: Plan migration to Glazed command framework + help system
+
+This step prepares the next refactor: converting `gitcommit` from a hand-rolled cobra CLI into a Glazed-based app with structured parameter layers and a queryable help system (embedded docs). The goal is consistency with other go-go-golems tools and to make documentation discoverable via `gitcommit help ...`.
+
+### What I did
+- Read:
+  - `glaze help build-first-command`
+  - `glaze help help-system`
+  - `glaze help how-to-write-good-documentation-pages`
+- Sketched the target layout: `cmd/gitcommit/cmds/$GROUP/root.go` + `cmd/gitcommit/cmds/$GROUP/$verb.go`
+
+### What I learned
+- Command implementation:
+  - Implement `cmds.GlazeCommand` (or other command interfaces) and build cobra commands via `cli.BuildCobraCommand`
+  - Define flags via `parameters.ParameterDefinition` and decode using `parsedLayers.InitializeStruct(layers.DefaultSlug, &Settings{})` (avoid reading cobra flags directly)
+  - Add Glazed output/layer flags using `settings.NewGlazedParameterLayers()` (when structured output is useful)
+- Help system:
+  - Initialize `help.NewHelpSystem()` and wire it with `help_cmd.SetupCobraRootCommand(helpSystem, rootCmd)`
+  - Load docs at startup from an embedded FS (`helpSystem.LoadSectionsFromFS(fs, "topics")`)
+  - Docs should be markdown with YAML frontmatter (Title/Slug/Short/Topics/SectionType/etc.) so they are queryable
+- Documentation style:
+  - Use clear Titles/Slugs, start with a short “why/what” intro, include concrete examples, and keep sections scannable.
+
+### What warrants a second pair of eyes
+- Command UX: whether we preserve the current “flat” command surface (e.g. `gitcommit commit`) exactly or adopt `GROUP VERB` naming everywhere.
+
+## Step 11: Convert gitcommit to Glazed command-based app + embedded help docs
+
+This step performs the core migration: `gitcommit` now uses the Glazed command framework (commands defined via `cmds.CommandDescription` and built into cobra via `cli.BuildCobraCommand`), with the Glazed help system initialized at startup and an embedded “how to use” guide.
+
+The CLI surface is preserved (`ticket`, `preflight`, `commit`, `docmgr ...`), but the implementation is now organized under `cmd/gitcommit/cmds/...` in the standard group/verb pattern.
+
+**Commit (code):** f519f66 — "GITCOMMIT-XXXX: Convert CLI to Glazed commands"
+
+### What I did
+- Added `cmd/gitcommit/cmds/...` command tree:
+  - `ticket` (structured output)
+  - `preflight` (structured output)
+  - `commit` (prints commit hash, updates docmgr optionally)
+  - `docmgr init`, `docmgr doctor`, `docmgr ticket create/exists`
+- Added a small Glazed-compatible repo flag layer (`pkg/layers`) to parse the root `--repo` flag without flag redefinition errors
+- Initialized the Glazed help system in `cmd/gitcommit/main.go` (like prescribe) and loaded embedded topics from `pkg/doc`
+- Added `pkg/doc/topics/01-how-to-use.md` and verified `gitcommit help how-to-use` renders correctly
+- Updated smoke tests to validate the help system topic
+
+### Why
+- Align gitcommit with other go-go-golems Glazed-based CLIs (consistent command patterns, layers, and help pages)
+- Make documentation discoverable and queryable via the built-in help system
+
+### What worked
+- `go test ./...` passes
+- `bash test-scripts/test-cli.sh` and `bash test-scripts/test-all.sh` pass
+- `go run ./cmd/gitcommit help how-to-use` renders the embedded guide
+
+### What didn't work
+N/A
+
+### What was tricky to build
+- Keeping the CLI behavior stable while switching out the underlying command plumbing (especially preserving `commit` printing only the hash to stdout).
+
+### What warrants a second pair of eyes
+- Help content organization: whether we should split the how-to into multiple smaller help topics (quickstart, docmgr integration, smoke tests) for better discoverability.
+
+### What should be done in the future
+- Add a short “Command reference” help topic listing the main commands and flags.
+
+### Code review instructions
+- Start in `cmd/gitcommit/main.go` and `cmd/gitcommit/cmds/root.go`
+- Review one command end-to-end (e.g. `cmd/gitcommit/cmds/commit/commit.go`)
+- Validate: `go test ./...` and `bash test-scripts/test-all.sh`

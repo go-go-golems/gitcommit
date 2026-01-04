@@ -23,3 +23,10 @@
 - [x] Add version/build info support and document it
 - [x] Add docmgr doctor/ticket-exists wrappers
 - [x] Extend smoke scripts to cover version + docmgr doctor
+- [x] Read glaze help pages (build-first-command, help-system, how-to-write-good-documentation-pages) and summarize decisions
+- [x] Restructure CLI to cmd/gitcommit/cmds//.go + /root.go (Glazed commands)
+- [x] Port existing commands: ticket, preflight, commit, docmgr (init/ticket create/exists/doctor)
+- [x] Initialize Glazed help system in cmd/gitcommit/main.go and load embedded docs
+- [x] Create pkg/doc embedded help topics (including a detailed how-to-use guide)
+- [x] Update smoke scripts to exercise Glazed-based CLI
+- [x] Remove old cobra-only CLI code (pkg/cli) and ensure tests pass

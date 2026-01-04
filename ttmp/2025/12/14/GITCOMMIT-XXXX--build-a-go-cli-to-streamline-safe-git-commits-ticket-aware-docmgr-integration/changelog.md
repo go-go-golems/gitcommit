@@ -153,3 +153,51 @@ Commit 82f6e2c6df18ffb74a50fe3b3e6f2bad28c37406: GITCOMMIT-XXXX: Add version and
 
 Ticket complete: initial gitcommit MVP
 
+
+## 2026-01-04
+
+Reopen ticket: migrate CLI to Glazed command framework + help system docs
+
+
+## 2026-01-04
+
+Commit f519f66c5b05750aac6cb0b2b200598e79456a55: GITCOMMIT-XXXX: Convert CLI to Glazed commands
+
+### Related Files
+
+- /home/manuel/workspaces/2026-01-04/gitcommit/README.md — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/cmd/gitcommit/cmds/commit/commit.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/cmd/gitcommit/cmds/commit/root.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/cmd/gitcommit/cmds/docmgr/doctor.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/cmd/gitcommit/cmds/docmgr/init.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/cmd/gitcommit/cmds/docmgr/root.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/cmd/gitcommit/cmds/docmgr/ticket/create.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/cmd/gitcommit/cmds/docmgr/ticket/exists.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/cmd/gitcommit/cmds/docmgr/ticket/root.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/cmd/gitcommit/cmds/preflight/check.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/cmd/gitcommit/cmds/preflight/root.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/cmd/gitcommit/cmds/root.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/cmd/gitcommit/cmds/ticket/root.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/cmd/gitcommit/cmds/ticket/show.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/cmd/gitcommit/main.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/go.mod — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/go.sum — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/app/ticket.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/buildinfo.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/commit.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/docmgr.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/helpers.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/preflight.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/root.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/ticket.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/doc/embed.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/doc/topics/01-how-to-use.md — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/layers/existing_cobra_flags_layer.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/layers/repository.go — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+- /home/manuel/workspaces/2026-01-04/gitcommit/test-scripts/test-cli.sh — Changed in commit f519f66c5b05750aac6cb0b2b200598e79456a55
+
+
+## 2026-01-04
+
+Ticket complete: migrate gitcommit to Glazed command framework
+
