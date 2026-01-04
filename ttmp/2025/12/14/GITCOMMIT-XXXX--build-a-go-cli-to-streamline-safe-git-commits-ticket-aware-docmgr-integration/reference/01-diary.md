@@ -213,3 +213,30 @@ N/A
 - Start in `pkg/cli/root.go` (`newCommitCmd`, `resolveTicket`)
 - Review helpers: `pkg/git/git.go`, `pkg/docmgr/docmgr.go`, `pkg/ticket/ticket.go`, `pkg/commitmsg/commitmsg.go`
 - Validate: `go test ./...` then stage a small change and run `go run ./cmd/gitcommit commit --ticket GITCOMMIT-XXXX -m "Test"`
+
+## Step 5: Make `gitcommit ticket` accept `--ticket`
+
+This is a small quality-of-life improvement: `gitcommit ticket` is meant as a debugging/visibility tool for the ticket resolution logic, and it should accept the same explicit override as `gitcommit commit`.
+
+**Commit (code):** eccb6a8 — "GITCOMMIT-XXXX: Allow --ticket override for ticket command"
+
+### What I did
+- Added `--ticket` flag to `gitcommit ticket` and routed it through the shared resolver
+
+### Why
+- Make it easy to see “what ticket would be used” even on branches like `main` (where auto-detection is expected to fail)
+
+### What worked
+- `go run ./cmd/gitcommit ticket --ticket GITCOMMIT-XXXX` prints the ID and source
+
+### What didn't work
+N/A
+
+### What was tricky to build
+N/A
+
+### What warrants a second pair of eyes
+- Whether the `ticket` command should *only* report auto-detection (and disallow explicit overrides). I assumed override is useful for debugging and scripting.
+
+### What should be done in the future
+N/A

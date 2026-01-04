@@ -39,3 +39,12 @@ Commit b6a781c7cef712999246591c0b187f001349777b: GITCOMMIT-XXXX: Add ticket-awar
 - /home/manuel/workspaces/2026-01-04/gitcommit/pkg/git/git.go — Changed in commit b6a781c7cef712999246591c0b187f001349777b
 - /home/manuel/workspaces/2026-01-04/gitcommit/pkg/ticket/ticket.go — Changed in commit b6a781c7cef712999246591c0b187f001349777b
 - /home/manuel/workspaces/2026-01-04/gitcommit/pkg/ticket/ticket_test.go — Changed in commit b6a781c7cef712999246591c0b187f001349777b
+
+## 2026-01-04
+
+Commit eccb6a8566c692eaba19c68aa725e526c941baeb: GITCOMMIT-XXXX: Allow --ticket override for ticket command
+
+### Related Files
+
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/root.go — Changed in commit eccb6a8566c692eaba19c68aa725e526c941baeb
+
