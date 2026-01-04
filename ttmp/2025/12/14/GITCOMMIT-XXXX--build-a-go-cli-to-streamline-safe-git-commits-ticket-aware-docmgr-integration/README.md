@@ -1,6 +1,6 @@
-# Bootstrap gitcommit repository
+# Build a Go CLI to streamline safe git commits (ticket-aware docmgr integration)
 
-This is the document workspace for ticket GITCOMMIT-0001.
+This is the document workspace for ticket GITCOMMIT-XXXX.
 
 ## Structure
 
@@ -16,6 +16,6 @@ This is the document workspace for ticket GITCOMMIT-0001.
 
 Use docmgr commands to manage this workspace:
 
-- Add documents: `docmgr doc add --ticket GITCOMMIT-0001 --doc-type design-doc --title "My Design"`
-- Import sources: `docmgr import file --ticket GITCOMMIT-0001 --file /path/to/doc.md`
-- Update metadata: `docmgr meta update --ticket GITCOMMIT-0001 --field Status --value review`
+- Add documents: `docmgr doc add --ticket GITCOMMIT-XXXX --doc-type design-doc --title "My Design"`
+- Import sources: `docmgr import file --ticket GITCOMMIT-XXXX --file /path/to/doc.md`
+- Update metadata: `docmgr meta update --ticket GITCOMMIT-XXXX --field Status --value review`

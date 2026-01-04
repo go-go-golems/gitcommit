@@ -5,6 +5,14 @@ topics:
       description: Backend services
     - slug: websocket
       description: WebSocket lifecycle & events
+    - slug: go
+      description: Go language
+    - slug: cli
+      description: Command-line interfaces
+    - slug: tooling
+      description: Developer tooling / build & release
+    - slug: repo
+      description: Repository scaffolding and maintenance
 docTypes:
     - slug: design-doc
       description: Structured rationale and architecture notes

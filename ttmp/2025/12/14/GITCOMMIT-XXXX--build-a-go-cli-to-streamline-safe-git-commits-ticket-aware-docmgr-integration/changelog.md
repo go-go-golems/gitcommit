@@ -23,5 +23,4 @@ Step 2: Initialize docmgr + create ticket workspace + diary
 ### Related Files
 
 - /home/manuel/workspaces/2026-01-04/gitcommit/.ttmp.yaml — Initialize docmgr configuration
-- /home/manuel/workspaces/2026-01-04/gitcommit/ttmp/2026/01/04/GITCOMMIT-0001--bootstrap-gitcommit-repository/reference/01-diary.md — Create and start implementation diary
-
+- /home/manuel/workspaces/2026-01-04/gitcommit/ttmp/2026/01/04/GITCOMMIT-XXXX--bootstrap-gitcommit-repository/reference/01-diary.md — Create and start implementation diary

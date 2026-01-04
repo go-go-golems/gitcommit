@@ -1,6 +1,6 @@
 ---
 Title: Diary
-Ticket: GITCOMMIT-0001
+Ticket: GITCOMMIT-XXXX
 Status: active
 Topics:
     - go
@@ -31,7 +31,7 @@ WhenToUse: ""
 
 ## Goal
 
-Track implementation work for `GITCOMMIT-0001` (bootstrap the `gitcommit` repository).
+Track implementation work for `GITCOMMIT-XXXX`: build a Go CLI to streamline safe git commits with ticket-aware `docmgr` integration.
 
 ## Step 1: Bootstrap repo + Go module + CLI skeleton
 
@@ -87,11 +87,11 @@ This step sets up the documentation scaffolding so subsequent work can be tracke
 
 It also relates the key repo files to the ticket and the diary for reverse lookup later.
 
-**Commit (docs):** c9fab30 — "Docs: initialize docmgr + start diary (GITCOMMIT-0001)"
+**Commit (docs):** c9fab30 — "Docs: initialize docmgr + start diary (GITCOMMIT-0001)" (superseded; ticket ID is now `GITCOMMIT-XXXX`)
 
 ### What I did
 - Ran `docmgr init --seed-vocabulary` to create `.ttmp.yaml` and the `ttmp/` docs root
-- Created ticket workspace `GITCOMMIT-0001`
+- Created ticket workspace `GITCOMMIT-XXXX` (originally created as `GITCOMMIT-0001`, then migrated)
 - Created this diary doc (`reference/01-diary.md`)
 - Related key repo files to the ticket index and diary
 
@@ -111,10 +111,46 @@ N/A
 - Remembering to use `--file-note "path:reason"` (colon separator) and prefer absolute paths per docmgr conventions.
 
 ### What warrants a second pair of eyes
-- Confirm the chosen ticket ID (`GITCOMMIT-0001`) matches the intended upstream tracking number, or advise if a different ID should be used.
+- Ticket ID is explicitly `GITCOMMIT-XXXX`.
 
 ### What should be done in the future
 - Keep diary steps small and frequent; record failures verbatim as they happen.
 
 ### Code review instructions
 - No code behavior changes in this step; verify `ttmp/` exists and docs render as expected.
+
+## Step 3: Migrate docs to the explicit ticket ID (GITCOMMIT-XXXX)
+
+This step fixes a bookkeeping mismatch: the initial docmgr ticket was created as `GITCOMMIT-0001`, but the tracking topic is explicitly `GITCOMMIT-XXXX`. Rather than leaving future work split across two IDs, I moved the ticket workspace directory and updated frontmatter/content so searches and ticket tooling are consistent going forward.
+
+This does not rewrite git history; earlier commits and messages remain as-is, but the active ticket workspace is now correctly named and referenced as `GITCOMMIT-XXXX`.
+
+### What I did
+- Created a `GITCOMMIT-XXXX` ticket workspace, then replaced it with the existing `GITCOMMIT-0001` workspace by moving the directory
+- Updated `Ticket:` frontmatter fields and any hard-coded ticket references in the workspace docs
+- Fixed absolute-path references in the changelog to point at the new workspace path
+
+### Why
+- Keep the docmgr workspace aligned with the explicit ticket ID used for the project
+
+### What worked
+- Ticket workspace now lives under `ttmp/2026/01/04/GITCOMMIT-XXXX--bootstrap-gitcommit-repository/`
+
+### What didn't work
+N/A
+
+### What I learned
+- Creating the wrong ticket ID early is recoverable, but it’s easiest to correct immediately before more docs accumulate.
+
+### What was tricky to build
+- Avoiding “half-migration” where the directory name changes but the `Ticket:` frontmatter and changelog paths still reference the old ID.
+
+### What warrants a second pair of eyes
+- Confirm `GITCOMMIT-XXXX` is the final desired ticket identifier (and whether it should be replaced with a concrete number later).
+
+### What should be done in the future
+- If `GITCOMMIT-XXXX` is a placeholder for a real ticket number, decide the final ID early and migrate once (not repeatedly).
+
+### Code review instructions
+- Inspect `ttmp/2026/01/04/GITCOMMIT-XXXX--bootstrap-gitcommit-repository/index.md` for `Ticket:`
+- Validate there are no lingering references: `rg -n "GITCOMMIT-0001" ttmp/2026/01/04/GITCOMMIT-XXXX--bootstrap-gitcommit-repository`

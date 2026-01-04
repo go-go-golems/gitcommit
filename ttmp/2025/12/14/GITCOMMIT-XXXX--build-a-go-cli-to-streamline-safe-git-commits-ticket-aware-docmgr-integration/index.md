@@ -1,6 +1,6 @@
 ---
-Title: Bootstrap gitcommit repository
-Ticket: GITCOMMIT-0001
+Title: Build a Go CLI to streamline safe git commits (ticket-aware docmgr integration)
+Ticket: GITCOMMIT-XXXX
 Status: active
 Topics:
     - go
@@ -31,7 +31,7 @@ WhenToUse: ""
 ---
 
 
-# Bootstrap gitcommit repository
+# Build a Go CLI to streamline safe git commits (ticket-aware docmgr integration)
 
 ## Overview
 
