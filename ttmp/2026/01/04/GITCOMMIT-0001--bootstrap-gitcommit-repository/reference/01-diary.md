@@ -87,6 +87,8 @@ This step sets up the documentation scaffolding so subsequent work can be tracke
 
 It also relates the key repo files to the ticket and the diary for reverse lookup later.
 
+**Commit (docs):** c9fab30 — "Docs: initialize docmgr + start diary (GITCOMMIT-0001)"
+
 ### What I did
 - Ran `docmgr init --seed-vocabulary` to create `.ttmp.yaml` and the `ttmp/` docs root
 - Created ticket workspace `GITCOMMIT-0001`
