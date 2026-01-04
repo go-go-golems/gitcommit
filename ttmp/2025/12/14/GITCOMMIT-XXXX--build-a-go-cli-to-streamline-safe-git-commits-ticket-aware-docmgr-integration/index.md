@@ -17,36 +17,35 @@ RelatedFiles:
       Note: Build/lint/test targets
     - Path: README.md
       Note: Project overview
+    - Path: cmd/gitcommit/cmds/commit/commit.go
+      Note: Glazed commit command implementation
+    - Path: cmd/gitcommit/cmds/docmgr/root.go
+      Note: Glazed docmgr command group
+    - Path: cmd/gitcommit/cmds/preflight/check.go
+      Note: Glazed preflight checks
+    - Path: cmd/gitcommit/cmds/root.go
+      Note: Root cobra command + command tree registration
+    - Path: cmd/gitcommit/cmds/ticket/show.go
+      Note: Glazed ticket detection command
     - Path: cmd/gitcommit/main.go
       Note: |-
         CLI entry point
         Build info injection via ldflags
+        CLI entry point (logging + help system init)
     - Path: go.mod
       Note: Go module root (github.com/go-go-golems/gitcommit)
-    - Path: pkg/cli/buildinfo.go
-      Note: Version/build metadata for --version
-    - Path: pkg/cli/commit.go
-      Note: Commit command implementation
-    - Path: pkg/cli/docmgr.go
-      Note: Docmgr wrapper commands
-    - Path: pkg/cli/helpers.go
-      Note: Shared CLI helpers (repo root
-    - Path: pkg/cli/preflight.go
-      Note: Preflight command implementation
-    - Path: pkg/cli/root.go
-      Note: |-
-        Cobra root command + Execute
-        Implements gitcommit subcommands
-    - Path: pkg/cli/ticket.go
-      Note: Ticket command implementation
     - Path: pkg/commitmsg/commitmsg.go
       Note: Ensure ticket prefix in commit summary
+    - Path: pkg/doc/topics/01-how-to-use.md
+      Note: End-user how-to guide (embedded help)
     - Path: pkg/docmgr/docmgr.go
       Note: |-
         Call docmgr to update ticket changelog
         Doctor wrapper and ticket create helper
     - Path: pkg/git/git.go
       Note: Wrap git commands (repo root
+    - Path: pkg/layers/repository.go
+      Note: Glazed layer for --repo flag
     - Path: pkg/ticket/ticket.go
       Note: Detect ticket ID from branch name
     - Path: pkg/validate/noise.go
@@ -65,6 +64,7 @@ LastUpdated: 2026-01-04T18:27:23.926420343-05:00
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
