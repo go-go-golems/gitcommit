@@ -47,7 +47,11 @@ test "$before" = "$after"
 echo "✓ Dry-run does not commit"
 echo ""
 
+echo "Test 5: Preflight (no docmgr)"
+gitcommit --repo "$TEST_REPO_DIR" preflight --docmgr=false >/dev/null
+echo "✓ Preflight works"
+echo ""
+
 echo "=========================================="
 echo "All tests passed ✓"
 echo "=========================================="
-

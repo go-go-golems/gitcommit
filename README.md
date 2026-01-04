@@ -10,6 +10,10 @@ Detect the ticket ID (from `--ticket`, `GITCOMMIT_TICKET`, or current git branch
 
 `gitcommit ticket`
 
+Preflight checks (staged files, ticket, optional docmgr ticket existence):
+
+`gitcommit preflight`
+
 Commit (requires staged files):
 
 `gitcommit commit --ticket ABC-123 -m "Fix widget ordering"`
@@ -24,6 +28,9 @@ By default, `gitcommit commit` updates `docmgr` via `docmgr changelog update --t
 
 - Disable with `--docmgr=false`
 - `docmgr` must be installed and the repo must be initialized (`.ttmp.yaml` present)
+- Create docmgr scaffolding:
+  - `gitcommit docmgr init`
+  - `gitcommit docmgr ticket create --ticket ABC-123 --title "..." --topics chat`
 
 ## Development
 

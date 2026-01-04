@@ -21,6 +21,30 @@ func IsAvailable() bool {
 	return err == nil
 }
 
+func Init(ctx context.Context, repoRoot string) error {
+	_, err := run(ctx, repoRoot, "init", "--seed-vocabulary")
+	return err
+}
+
+func CreateTicket(ctx context.Context, repoRoot string, ticketID string, title string, topics []string) error {
+	args := []string{"ticket", "create-ticket", "--ticket", ticketID, "--title", title}
+
+	var cleaned []string
+	for _, t := range topics {
+		t = strings.TrimSpace(t)
+		if t == "" {
+			continue
+		}
+		cleaned = append(cleaned, t)
+	}
+	if len(cleaned) > 0 {
+		args = append(args, "--topics", strings.Join(cleaned, ","))
+	}
+
+	_, err := run(ctx, repoRoot, args...)
+	return err
+}
+
 func TicketExists(ctx context.Context, repoRoot string, ticketID string) (bool, error) {
 	out, err := run(ctx, repoRoot, "ticket", "list", "--ticket", ticketID)
 	if err != nil {

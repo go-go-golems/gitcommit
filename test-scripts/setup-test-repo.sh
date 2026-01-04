@@ -28,13 +28,6 @@ git checkout -b "feature/${TICKET_ID}-smoke" >/dev/null
 echo "more" >> hello.txt
 git add hello.txt
 
-if command -v docmgr >/dev/null; then
-	docmgr init --seed-vocabulary >/dev/null
-	docmgr ticket create-ticket --ticket "$TICKET_ID" --title "Smoke test" --topics chat >/dev/null
-else
-	echo "WARNING: docmgr not found; docmgr-related tests will be skipped" >&2
-fi
-
 echo ""
 echo "Test repository created successfully at: $TEST_DIR"
 echo "Branch: $(git rev-parse --abbrev-ref HEAD)"

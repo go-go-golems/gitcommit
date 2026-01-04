@@ -26,9 +26,12 @@ echo "=== PHASE 1: Basic CLI ==="
 gitcommit --help >/dev/null
 gitcommit commit --help >/dev/null
 gitcommit ticket --help >/dev/null
+gitcommit preflight --help >/dev/null
+gitcommit docmgr --help >/dev/null
 echo ""
 
 echo "=== PHASE 2: Commit without docmgr ==="
+gitcommit --repo "$TEST_REPO_DIR" preflight --docmgr=false >/dev/null
 hash1="$(gitcommit --repo "$TEST_REPO_DIR" commit --docmgr=false -m "No docmgr commit")"
 subject1="$(git -C "$TEST_REPO_DIR" log -1 --pretty=%s)"
 echo "$subject1" | rg -q "^${TICKET_ID}: "
@@ -40,6 +43,11 @@ echo "again" >> "$TEST_REPO_DIR/hello.txt"
 git -C "$TEST_REPO_DIR" add hello.txt
 
 if command -v docmgr >/dev/null; then
+	# Use gitcommit wrappers to set up docmgr for this repo.
+	gitcommit --repo "$TEST_REPO_DIR" docmgr init >/dev/null
+	gitcommit --repo "$TEST_REPO_DIR" docmgr ticket create --ticket "$TICKET_ID" --title "Smoke test" --topics chat >/dev/null
+	gitcommit --repo "$TEST_REPO_DIR" preflight >/dev/null
+
 	hash2="$(gitcommit --repo "$TEST_REPO_DIR" commit -m "Docmgr updated commit")"
 	# Find the ticket changelog path created by docmgr in this repo.
 	changelog="$(find "$TEST_REPO_DIR/ttmp" -path "*${TICKET_ID}--*" -name changelog.md | head -1)"
