@@ -21,10 +21,20 @@ RelatedFiles:
       Note: CLI entry point
     - Path: go.mod
       Note: Go module root (github.com/go-go-golems/gitcommit)
+    - Path: pkg/cli/commit.go
+      Note: Commit command implementation
+    - Path: pkg/cli/docmgr.go
+      Note: Docmgr wrapper commands
+    - Path: pkg/cli/helpers.go
+      Note: Shared CLI helpers (repo root
+    - Path: pkg/cli/preflight.go
+      Note: Preflight command implementation
     - Path: pkg/cli/root.go
       Note: |-
         Cobra root command + Execute
         Implements gitcommit subcommands
+    - Path: pkg/cli/ticket.go
+      Note: Ticket command implementation
     - Path: pkg/commitmsg/commitmsg.go
       Note: Ensure ticket prefix in commit summary
     - Path: pkg/docmgr/docmgr.go
@@ -49,6 +59,7 @@ LastUpdated: 2026-01-04T17:14:42.037821946-05:00
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 

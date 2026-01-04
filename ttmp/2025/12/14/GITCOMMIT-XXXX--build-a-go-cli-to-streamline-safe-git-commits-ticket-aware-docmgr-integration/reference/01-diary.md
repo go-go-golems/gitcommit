@@ -19,6 +19,10 @@ RelatedFiles:
       Note: Entry point used in diary steps
     - Path: go.mod
       Note: Module init + dependency tracking
+    - Path: pkg/cli/docmgr.go
+      Note: Diary-tracked docmgr wrappers
+    - Path: pkg/cli/preflight.go
+      Note: Diary-tracked preflight logic
     - Path: pkg/cli/root.go
       Note: |-
         Core CLI skeleton
@@ -31,12 +35,19 @@ RelatedFiles:
       Note: Diary-tracked git plumbing
     - Path: pkg/ticket/ticket.go
       Note: Diary-tracked ticket detection
+    - Path: test-scripts/setup-test-repo.sh
+      Note: Diary-tracked smoke setup
+    - Path: test-scripts/test-all.sh
+      Note: Diary-tracked smoke suite
+    - Path: test-scripts/test-cli.sh
+      Note: Diary-tracked smoke checks
 ExternalSources: []
 Summary: ""
 LastUpdated: 2026-01-04T17:14:45.432770047-05:00
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -314,3 +325,40 @@ N/A
 ### Code review instructions
 - Start in `pkg/validate/noise.go` and the `commit` command in `pkg/cli/root.go`
 - Run: `bash test-scripts/test-all.sh`
+
+## Step 8: Add `preflight` and `docmgr` helper commands + refactor CLI
+
+This step adds two features that make the tool easier to use and reason about:
+1) a `preflight` command that surfaces the same validations `commit` relies on (ticket resolution, staged file set, noise policy, and docmgr ticket existence), and
+2) a small `docmgr` wrapper surface for initializing docmgr and creating tickets without leaving `gitcommit`.
+
+It also refactors the cobra implementation into separate files so each command is readable and easier to extend.
+
+### What I did
+- Added `gitcommit preflight` and extracted the shared noise error formatting
+- Added `gitcommit docmgr init` and `gitcommit docmgr ticket create` wrappers
+- Split `pkg/cli` into `root.go`, `commit.go`, `ticket.go`, `preflight.go`, `docmgr.go`, `helpers.go`
+- Updated smoke scripts to exercise `preflight` and the `docmgr` wrappers
+
+### Why
+- Make “what will happen” inspectable before creating a commit
+- Reduce context switching by wrapping common docmgr setup operations
+
+### What worked
+- `bash test-scripts/test-cli.sh` and `bash test-scripts/test-all.sh` pass after refactor
+
+### What didn't work
+N/A
+
+### What was tricky to build
+- Ensuring `commit` still fails early (docmgr preflight) and retains the same semantics after splitting files.
+
+### What warrants a second pair of eyes
+- Whether `docmgr ticket create` should default topics to `chat` (it’s a pragmatic default for docmgr’s seeded vocabulary).
+
+### What should be done in the future
+- Add `docmgr ticket exists` and/or `docmgr doctor` wrappers if we want a fully “docmgr-aware” workflow inside `gitcommit`.
+
+### Code review instructions
+- Start in `pkg/cli/root.go`, then review `pkg/cli/commit.go`, `pkg/cli/preflight.go`, `pkg/cli/docmgr.go`
+- Validate with `bash test-scripts/test-all.sh`

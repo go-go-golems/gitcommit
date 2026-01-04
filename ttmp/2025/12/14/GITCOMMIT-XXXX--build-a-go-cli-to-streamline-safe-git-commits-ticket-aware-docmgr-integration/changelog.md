@@ -91,3 +91,33 @@ Commit 9e93d831e726cd926f7687fb5ef9c77af37e37ee: GITCOMMIT-XXXX: Block common no
 - /home/manuel/workspaces/2026-01-04/gitcommit/pkg/validate/noise.go — Changed in commit 9e93d831e726cd926f7687fb5ef9c77af37e37ee
 - /home/manuel/workspaces/2026-01-04/gitcommit/test-scripts/test-all.sh — Changed in commit 9e93d831e726cd926f7687fb5ef9c77af37e37ee
 
+
+## 2026-01-04
+
+Step 8: Add preflight + docmgr helper commands; refactor CLI
+
+### Related Files
+
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/docmgr.go — Docmgr wrapper commands
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/preflight.go — New preflight command
+- /home/manuel/workspaces/2026-01-04/gitcommit/test-scripts/test-all.sh — Smoke suite updated to use wrappers
+
+
+## 2026-01-04
+
+Commit 07141cb993f1f5284942f117f2d978952fe0d9bf: GITCOMMIT-XXXX: Add preflight and docmgr helper commands
+
+### Related Files
+
+- /home/manuel/workspaces/2026-01-04/gitcommit/README.md — Changed in commit 07141cb993f1f5284942f117f2d978952fe0d9bf
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/commit.go — Changed in commit 07141cb993f1f5284942f117f2d978952fe0d9bf
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/docmgr.go — Changed in commit 07141cb993f1f5284942f117f2d978952fe0d9bf
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/helpers.go — Changed in commit 07141cb993f1f5284942f117f2d978952fe0d9bf
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/preflight.go — Changed in commit 07141cb993f1f5284942f117f2d978952fe0d9bf
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/root.go — Changed in commit 07141cb993f1f5284942f117f2d978952fe0d9bf
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/ticket.go — Changed in commit 07141cb993f1f5284942f117f2d978952fe0d9bf
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/docmgr/docmgr.go — Changed in commit 07141cb993f1f5284942f117f2d978952fe0d9bf
+- /home/manuel/workspaces/2026-01-04/gitcommit/test-scripts/setup-test-repo.sh — Changed in commit 07141cb993f1f5284942f117f2d978952fe0d9bf
+- /home/manuel/workspaces/2026-01-04/gitcommit/test-scripts/test-all.sh — Changed in commit 07141cb993f1f5284942f117f2d978952fe0d9bf
+- /home/manuel/workspaces/2026-01-04/gitcommit/test-scripts/test-cli.sh — Changed in commit 07141cb993f1f5284942f117f2d978952fe0d9bf
+

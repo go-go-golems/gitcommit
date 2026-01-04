@@ -17,3 +17,6 @@
 - [x] Run smoke test scripts and record results
 - [x] Add noise-file safety check for staged files (block dist/, node_modules/, .env, etc.)
 - [x] Extend smoke tests to cover noise-file rejection
+- [x] Add preflight command to validate staged state/ticket/docmgr before commit
+- [x] Add gitcommit docmgr wrappers (init, ticket create)
+- [x] Refactor CLI into separate files (commit/ticket/preflight/docmgr)
