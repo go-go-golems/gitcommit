@@ -280,3 +280,37 @@ N/A
 ### Code review instructions
 - Start in `test-scripts/test-cli.sh` and `test-scripts/test-all.sh`
 - Run: `bash test-scripts/test-all.sh`
+
+## Step 7: Block common noise files by default (safe commit)
+
+This step adds a “safety rail” to `gitcommit commit`: it refuses to create a commit if the staged file set includes common noise artifacts (build output, dependency folders, `.env`, logs, etc.). This directly encodes the “Never Commit (Common Noise)” guidance into the tool, while still providing an explicit escape hatch (`--allow-noise`) when you really need it.
+
+The smoke test suite was extended to verify the default rejection behavior.
+
+### What I did
+- Added `pkg/validate/noise.go` to detect common noise paths in the staged set
+- Wired the check into `gitcommit commit` (with `--allow-noise` override)
+- Moved docmgr checks to be a preflight (fail before creating the git commit when docmgr is required)
+- Extended `test-scripts/test-all.sh` with a phase that stages `dist/noise.bin` and asserts the commit is rejected
+
+### Why
+- Make the safe path the default and prevent accidental “oops” commits
+
+### What worked
+- `bash test-scripts/test-all.sh` passes, including the noise rejection phase
+
+### What didn't work
+N/A
+
+### What was tricky to build
+- Keeping the checks simple and deterministic (string/path-prefix matching) instead of trying to perfectly model gitignore semantics.
+
+### What warrants a second pair of eyes
+- Confirm the noise list matches your preferred policy (it’s based on `~/.cursor/commands/git-commit-instructions.md`).
+
+### What should be done in the future
+- Consider supporting a repo-local allowlist/denylist config file for teams with different noise policies.
+
+### Code review instructions
+- Start in `pkg/validate/noise.go` and the `commit` command in `pkg/cli/root.go`
+- Run: `bash test-scripts/test-all.sh`

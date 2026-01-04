@@ -33,6 +33,8 @@ RelatedFiles:
       Note: Wrap git commands (repo root
     - Path: pkg/ticket/ticket.go
       Note: Detect ticket ID from branch name
+    - Path: pkg/validate/noise.go
+      Note: Detect common noise artifacts in staged files
     - Path: test-scripts/README.md
       Note: How to run smoke tests
     - Path: test-scripts/setup-test-repo.sh
@@ -47,6 +49,7 @@ LastUpdated: 2026-01-04T17:14:42.037821946-05:00
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 

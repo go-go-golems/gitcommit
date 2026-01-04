@@ -15,3 +15,5 @@
 - [x] Update README with usage examples
 - [x] Add smoke test scripts (create temp repo, exercise ticket/commit commands)
 - [x] Run smoke test scripts and record results
+- [x] Add noise-file safety check for staged files (block dist/, node_modules/, .env, etc.)
+- [x] Extend smoke tests to cover noise-file rejection

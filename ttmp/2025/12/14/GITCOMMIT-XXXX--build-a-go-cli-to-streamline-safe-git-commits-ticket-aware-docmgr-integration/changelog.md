@@ -70,3 +70,24 @@ Commit 0798a66ca8e823270b93083323f7a4aff764b158: GITCOMMIT-XXXX: Add smoke test 
 - /home/manuel/workspaces/2026-01-04/gitcommit/test-scripts/test-all.sh — Changed in commit 0798a66ca8e823270b93083323f7a4aff764b158
 - /home/manuel/workspaces/2026-01-04/gitcommit/test-scripts/test-cli.sh — Changed in commit 0798a66ca8e823270b93083323f7a4aff764b158
 
+
+## 2026-01-04
+
+Step 7: Block noise files by default (safe commit)
+
+### Related Files
+
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/root.go — Enforce noise check and docmgr preflight
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/validate/noise.go — Noise detection
+
+
+## 2026-01-04
+
+Commit 9e93d831e726cd926f7687fb5ef9c77af37e37ee: GITCOMMIT-XXXX: Block common noise files by default
+
+### Related Files
+
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/root.go — Changed in commit 9e93d831e726cd926f7687fb5ef9c77af37e37ee
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/validate/noise.go — Changed in commit 9e93d831e726cd926f7687fb5ef9c77af37e37ee
+- /home/manuel/workspaces/2026-01-04/gitcommit/test-scripts/test-all.sh — Changed in commit 9e93d831e726cd926f7687fb5ef9c77af37e37ee
+
