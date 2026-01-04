@@ -18,9 +18,13 @@ RelatedFiles:
     - Path: README.md
       Note: Project overview
     - Path: cmd/gitcommit/main.go
-      Note: CLI entry point
+      Note: |-
+        CLI entry point
+        Build info injection via ldflags
     - Path: go.mod
       Note: Go module root (github.com/go-go-golems/gitcommit)
+    - Path: pkg/cli/buildinfo.go
+      Note: Version/build metadata for --version
     - Path: pkg/cli/commit.go
       Note: Commit command implementation
     - Path: pkg/cli/docmgr.go
@@ -38,7 +42,9 @@ RelatedFiles:
     - Path: pkg/commitmsg/commitmsg.go
       Note: Ensure ticket prefix in commit summary
     - Path: pkg/docmgr/docmgr.go
-      Note: Call docmgr to update ticket changelog
+      Note: |-
+        Call docmgr to update ticket changelog
+        Doctor wrapper and ticket create helper
     - Path: pkg/git/git.go
       Note: Wrap git commands (repo root
     - Path: pkg/ticket/ticket.go
@@ -59,6 +65,7 @@ LastUpdated: 2026-01-04T17:14:42.037821946-05:00
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 

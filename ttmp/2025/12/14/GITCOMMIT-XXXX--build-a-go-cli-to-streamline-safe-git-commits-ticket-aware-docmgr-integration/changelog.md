@@ -121,3 +121,30 @@ Commit 07141cb993f1f5284942f117f2d978952fe0d9bf: GITCOMMIT-XXXX: Add preflight a
 - /home/manuel/workspaces/2026-01-04/gitcommit/test-scripts/test-all.sh — Changed in commit 07141cb993f1f5284942f117f2d978952fe0d9bf
 - /home/manuel/workspaces/2026-01-04/gitcommit/test-scripts/test-cli.sh — Changed in commit 07141cb993f1f5284942f117f2d978952fe0d9bf
 
+
+## 2026-01-04
+
+Step 9: Add version/build info and docmgr doctor/exists wrappers
+
+### Related Files
+
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/buildinfo.go — Version/build info
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/docmgr.go — Add doctor + ticket exists
+- /home/manuel/workspaces/2026-01-04/gitcommit/test-scripts/test-cli.sh — Smoke test version flag
+
+
+## 2026-01-04
+
+Commit 82f6e2c6df18ffb74a50fe3b3e6f2bad28c37406: GITCOMMIT-XXXX: Add version and docmgr doctor/exists commands
+
+### Related Files
+
+- /home/manuel/workspaces/2026-01-04/gitcommit/.goreleaser.yaml — Changed in commit 82f6e2c6df18ffb74a50fe3b3e6f2bad28c37406
+- /home/manuel/workspaces/2026-01-04/gitcommit/README.md — Changed in commit 82f6e2c6df18ffb74a50fe3b3e6f2bad28c37406
+- /home/manuel/workspaces/2026-01-04/gitcommit/cmd/gitcommit/main.go — Changed in commit 82f6e2c6df18ffb74a50fe3b3e6f2bad28c37406
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/buildinfo.go — Changed in commit 82f6e2c6df18ffb74a50fe3b3e6f2bad28c37406
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/cli/docmgr.go — Changed in commit 82f6e2c6df18ffb74a50fe3b3e6f2bad28c37406
+- /home/manuel/workspaces/2026-01-04/gitcommit/pkg/docmgr/docmgr.go — Changed in commit 82f6e2c6df18ffb74a50fe3b3e6f2bad28c37406
+- /home/manuel/workspaces/2026-01-04/gitcommit/test-scripts/test-all.sh — Changed in commit 82f6e2c6df18ffb74a50fe3b3e6f2bad28c37406
+- /home/manuel/workspaces/2026-01-04/gitcommit/test-scripts/test-cli.sh — Changed in commit 82f6e2c6df18ffb74a50fe3b3e6f2bad28c37406
+

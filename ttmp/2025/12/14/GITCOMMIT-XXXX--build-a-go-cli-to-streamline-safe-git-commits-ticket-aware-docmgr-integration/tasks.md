@@ -20,3 +20,6 @@
 - [x] Add preflight command to validate staged state/ticket/docmgr before commit
 - [x] Add gitcommit docmgr wrappers (init, ticket create)
 - [x] Refactor CLI into separate files (commit/ticket/preflight/docmgr)
+- [x] Add version/build info support and document it
+- [x] Add docmgr doctor/ticket-exists wrappers
+- [x] Extend smoke scripts to cover version + docmgr doctor

@@ -16,9 +16,13 @@ RelatedFiles:
     - Path: README.md
       Note: User-facing usage docs
     - Path: cmd/gitcommit/main.go
-      Note: Entry point used in diary steps
+      Note: |-
+        Entry point used in diary steps
+        Diary-tracked build info injection
     - Path: go.mod
       Note: Module init + dependency tracking
+    - Path: pkg/cli/buildinfo.go
+      Note: Diary-tracked version/build info
     - Path: pkg/cli/docmgr.go
       Note: Diary-tracked docmgr wrappers
     - Path: pkg/cli/preflight.go
@@ -47,6 +51,7 @@ LastUpdated: 2026-01-04T17:14:45.432770047-05:00
 WhatFor: ""
 WhenToUse: ""
 ---
+
 
 
 
@@ -323,7 +328,7 @@ N/A
 - Consider supporting a repo-local allowlist/denylist config file for teams with different noise policies.
 
 ### Code review instructions
-- Start in `pkg/validate/noise.go` and the `commit` command in `pkg/cli/root.go`
+- Start in `pkg/validate/noise.go` and the `commit` command in `pkg/cli/commit.go`
 - Run: `bash test-scripts/test-all.sh`
 
 ## Step 8: Add `preflight` and `docmgr` helper commands + refactor CLI
@@ -357,8 +362,41 @@ N/A
 - Whether `docmgr ticket create` should default topics to `chat` (it’s a pragmatic default for docmgr’s seeded vocabulary).
 
 ### What should be done in the future
-- Add `docmgr ticket exists` and/or `docmgr doctor` wrappers if we want a fully “docmgr-aware” workflow inside `gitcommit`.
+- Add wrappers for `docmgr ticket close` and `docmgr doctor` at repo-root level if we want more of the lifecycle inside `gitcommit`.
 
 ### Code review instructions
 - Start in `pkg/cli/root.go`, then review `pkg/cli/commit.go`, `pkg/cli/preflight.go`, `pkg/cli/docmgr.go`
 - Validate with `bash test-scripts/test-all.sh`
+
+## Step 9: Add version/build info and docmgr doctor/exists wrappers
+
+This step rounds out the “tooling ergonomics” portion: it adds build metadata so `gitcommit --version` is meaningful in CI/releases, and it fills in the remaining docmgr helpers that were called out as future work (ticket existence checks and `doctor`).
+
+The smoke scripts were extended to cover these new surfaces.
+
+### What I did
+- Added build info plumbing (`gitcommit --version`) via `ldflags` + `cli.SetBuildInfo`
+- Added `gitcommit docmgr doctor` and `gitcommit docmgr ticket exists`
+- Extended `test-scripts/test-cli.sh` and `test-scripts/test-all.sh` to cover version and docmgr doctor
+
+### Why
+- Make builds traceable and docmgr flows testable/inspectable from the same CLI
+
+### What worked
+- `bash test-scripts/test-cli.sh` and `bash test-scripts/test-all.sh` pass
+
+### What didn't work
+N/A
+
+### What was tricky to build
+- Keeping `--version` stable while still allowing goreleaser to inject commit/date metadata.
+
+### What warrants a second pair of eyes
+- Whether the `--version` output format is what you want for release notes/debugging (currently prints version + commit + date).
+
+### What should be done in the future
+- Add `gitcommit docmgr ticket close` wrapper to complete the ticket lifecycle (optional).
+
+### Code review instructions
+- Start in `cmd/gitcommit/main.go` and `pkg/cli/buildinfo.go`
+- Review `pkg/cli/docmgr.go` and `pkg/docmgr/docmgr.go`
