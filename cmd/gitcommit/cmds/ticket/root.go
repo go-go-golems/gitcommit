@@ -3,7 +3,6 @@ package ticket
 import (
 	"sync"
 
-	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )
 
@@ -21,10 +20,4 @@ func Init() error {
 		TicketCmd = TicketShowCmd
 	})
 	return initErr
-}
-
-func must(err error) {
-	if err != nil {
-		panic(errors.Wrap(err, "init"))
-	}
 }
