@@ -201,3 +201,13 @@ Commit f519f66c5b05750aac6cb0b2b200598e79456a55: GITCOMMIT-XXXX: Convert CLI to 
 
 Ticket complete: migrate gitcommit to Glazed command framework
 
+
+## 2026-01-04
+
+Commit e6ea7bbb86a8ee7be7c1f7cddcc8b30871d3bdd1: Chore: enable lefthook + clean template leftovers
+
+### Related Files
+
+- /home/manuel/workspaces/2026-01-04/gitcommit/lefthook.yml — Enable and configure lefthook hooks
+- /home/manuel/workspaces/2026-01-04/gitcommit/AGENT.md — Remove remaining template placeholders
+- /home/manuel/workspaces/2026-01-04/gitcommit/cmd/gitcommit/cmds/ticket/root.go — Remove unused helper (lint fix)

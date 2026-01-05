@@ -1,7 +1,7 @@
 ---
 Title: Diary
 Ticket: GITCOMMIT-XXXX
-Status: active
+Status: complete
 Topics:
     - go
     - cli
@@ -15,41 +15,33 @@ RelatedFiles:
       Note: docmgr configuration
     - Path: README.md
       Note: User-facing usage docs
-    - Path: cmd/gitcommit/cmds
-      Note: Target glazed command tree
+    - Path: lefthook.yml
+      Note: Local hooks for lint/test/release checks
     - Path: cmd/gitcommit/main.go
-      Note: |-
-        Entry point used in diary steps
-        Diary-tracked build info injection
-    - Path: go.mod
-      Note: Module init + dependency tracking
-    - Path: pkg/cli/buildinfo.go
-      Note: Diary-tracked version/build info
-    - Path: pkg/cli/docmgr.go
-      Note: Diary-tracked docmgr wrappers
-    - Path: pkg/cli/preflight.go
-      Note: Diary-tracked preflight logic
-    - Path: pkg/cli/root.go
-      Note: |-
-        Core CLI skeleton
-        Diary-tracked CLI implementation
-    - Path: pkg/commitmsg/commitmsg.go
-      Note: Diary-tracked message formatting
-    - Path: pkg/docmgr/docmgr.go
-      Note: Diary-tracked docmgr integration
-    - Path: pkg/git/git.go
-      Note: Diary-tracked git plumbing
+      Note: CLI entry point (logging + help system init)
+    - Path: cmd/gitcommit/cmds/root.go
+      Note: Command tree registration
+    - Path: cmd/gitcommit/cmds/commit/commit.go
+      Note: Commit command implementation
+    - Path: cmd/gitcommit/cmds/preflight/check.go
+      Note: Preflight checks
+    - Path: cmd/gitcommit/cmds/ticket/show.go
+      Note: Ticket detection command
+    - Path: cmd/gitcommit/cmds/docmgr/root.go
+      Note: docmgr command group
+    - Path: pkg/doc/topics/01-how-to-use.md
+      Note: Embedded user guide
+    - Path: pkg/layers/repository.go
+      Note: Glazed layer for the root --repo flag
     - Path: pkg/ticket/ticket.go
-      Note: Diary-tracked ticket detection
-    - Path: test-scripts/setup-test-repo.sh
-      Note: Diary-tracked smoke setup
+      Note: Ticket parsing and detection
     - Path: test-scripts/test-all.sh
-      Note: Diary-tracked smoke suite
+      Note: End-to-end smoke tests
     - Path: test-scripts/test-cli.sh
-      Note: Diary-tracked smoke checks
+      Note: Minimal CLI smoke tests
 ExternalSources: []
 Summary: ""
-LastUpdated: 2026-01-04T17:14:45.432770047-05:00
+LastUpdated: 2026-01-04T18:37:59-05:00
 WhatFor: ""
 WhenToUse: ""
 ---
@@ -474,3 +466,25 @@ N/A
 - Start in `cmd/gitcommit/main.go` and `cmd/gitcommit/cmds/root.go`
 - Review one command end-to-end (e.g. `cmd/gitcommit/cmds/commit/commit.go`)
 - Validate: `go test ./...` and `bash test-scripts/test-all.sh`
+
+## Step 12: Enable lefthook + template cleanup PR
+
+This step is “repo polish”: it enables lefthook for local guardrails, removes remaining template leftovers, and ensures `make lint` is clean.
+
+**Commit (code):** e6ea7bb — "Chore: enable lefthook + clean template leftovers"
+
+### What I did
+- Enabled lefthook (`lefthook.yml`) and ensured hooks match repo targets (`make lint`, `make test`, `make goreleaser`)
+- Cleaned up remaining template references in `AGENT.md`
+- Removed an unused helper in `cmd/gitcommit/cmds/ticket/root.go` that was tripping `make lint`
+- Re-ran validations: `make lint`, `make test`, `bash test-scripts/test-cli.sh`, `bash test-scripts/test-all.sh`
+- Opened PR: https://github.com/go-go-golems/gitcommit/pull/1
+
+### Why
+- Keep local checks consistent and prevent regressions before pushing changes upstream
+
+### What worked
+- All validations pass cleanly
+
+### What didn't work
+N/A
