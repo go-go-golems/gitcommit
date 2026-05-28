@@ -1,0 +1,3 @@
+package gitcommit
+
+//go:generate go tool logcopter-gen -include-main -var zlog -area-prefix go-go-golems.gitcommit -strip-prefix github.com/go-go-golems/gitcommit ./cmd/... ./pkg/...

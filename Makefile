@@ -57,3 +57,11 @@ GITCOMMIT_BINARY=$(shell which gitcommit)
 install:
 	go build -o ./dist/gitcommit ./cmd/gitcommit && \
 		cp ./dist/gitcommit $(GITCOMMIT_BINARY)
+
+.PHONY: logcopter-generate
+logcopter-generate:
+	GOWORK=off go tool logcopter-gen -include-main -var zlog -area-prefix go-go-golems.gitcommit -strip-prefix github.com/go-go-golems/gitcommit ./cmd/... ./pkg/...
+
+.PHONY: logcopter-check
+logcopter-check:
+	GOWORK=off go tool logcopter-gen -include-main -var zlog -area-prefix go-go-golems.gitcommit -strip-prefix github.com/go-go-golems/gitcommit -check ./cmd/... ./pkg/...
